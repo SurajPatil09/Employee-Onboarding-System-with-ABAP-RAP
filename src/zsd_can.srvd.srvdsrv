@@ -1,0 +1,6 @@
+@EndUserText.label: 'Serv Definition for EMP HR app'
+define service ZSD_CAN {
+  expose ZC_CD       as Candidate;
+  expose ZC_EMPL_431 as Employee;
+  expose ZC_HR_431   as HR;
+}
