@@ -1,0 +1,121 @@
+managed;
+strict ( 2 );
+//with draft;
+define behavior for zi_cd alias candidate
+implementation in class zbp_i_cd unique
+persistent table zdt_cd_431
+//draft table zlevel_cd
+lock master
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+  association _emp { create;} //with draft;  }
+
+ field ( numbering : managed , readonly ) CanUuid ;
+ field ( readonly ) CanId, CandidateStatus ;
+ field ( mandatory ) FirstName, LastName,Email;
+
+//  draft action Edit;
+//  draft action Activate;
+//  draft action Discard;
+//  draft action Resume;
+//  draft determine action Prepare {
+//  validation (always ) validateName;
+//  validation (always ) validateLName;}
+
+
+  action ( features : instance ) Accept_Candidate result [1] $self;
+  action ( features : instance ) Reject_Candidate result [1] $self;
+
+  determination setInitialStatus on modify { create; }
+  determination CreateCandidateID on save { create; }
+  validation validateName on save { field FirstName; create; }
+  validation validateLName on save { field LastName; create; }
+  validation validatecurrency on save {field CurrencyCode;create;update;}
+
+ mapping for zdt_cd_431
+ {
+    CanUuid       = can_uuid ;
+    CanId         = can_id;
+    FirstName     = first_name ;
+    LastName      = last_name ;
+    ContactNo     = contact_no;
+    InterviewDate = interview_date;
+    CandidateStatus = candidate_status;
+    Email           = email ;
+    Salary         = salary;
+    CurrencyCode   = currency_code;
+    Address         = address ;
+    LocalLastChangedAt = local_last_changed_at ;
+
+ }
+}
+
+define behavior for zi_empl_431 alias employee
+implementation in class zbp_i_empl unique
+persistent table zdt_emp_431
+//draft table ZLEVEL_EMP
+lock dependent by _can
+authorization dependent by _can
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+ field ( numbering : managed , readonly ) EmpUuid ;//
+ field ( readonly ) CanUuid, EmpId;
+ association _can ;//{ with draft; }
+ association _hr { create;} //with draft; }
+
+//  action ( features : instance ) acceptPromotion result [1] $self;
+//  action ( features : instance ) rejectPromotion result [1] $self;
+
+//  determination setInitialPromotionStatus on modify { create; }
+determination CreateEmployeeID on save { create; update;}
+
+mapping for  zdt_emp_431
+ {
+  EmpUuid = emp_uuid ;
+  CanUuid  = can_uuid ;
+  EmpId  = emp_id;
+  CanId  = can_id;
+  Dateofjoining   =dateofjoining ;
+  ProjName   =proj_name;
+  ProjAssignStartdate  = proj_assign_startdate ;
+  ProjAssignEnddate = proj_assign_enddate ;
+  Location  = location ;
+  Promotionstatus   =promotionstatus;
+  LocalLastChangedAt = local_last_changed_at ;
+ }
+}
+
+define behavior for zi_hr_431 alias hr
+implementation in class zbp_i_hr unique
+persistent table zdt_hr_431
+//draft table ZLEVEL_HR
+lock dependent by _can
+authorization dependent by _can
+etag master Lastchangedat
+{
+  update;
+  delete;
+  field ( numbering : managed , readonly ) HrUuid ;
+  field ( readonly ) EmpUuid, CanUuid;
+  association _can ;//{ with draft; }
+  association _emp ;//{ with draft; }
+
+
+  mapping for zdt_hr_431
+  {
+   HrUuid =     hr_uuid;
+   EmpUuid =    emp_uuid ;
+   CanUuid =    can_uuid ;
+   Lastdesignation = lastdesignation ;
+   Experience  = experience ;
+   Seperation  = seperation;
+   Seperationdate  = seperationdate ;
+   lastchangedat = lastchangedat ;
+  }
+}

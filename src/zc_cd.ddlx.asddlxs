@@ -1,0 +1,99 @@
+@Metadata.layer: #CUSTOMER
+
+@UI: {
+  headerInfo: 
+  { typeName: 'Candidate',
+  typeNamePlural: 'Create New Candidate',
+  title: {
+  type: #STANDARD, 
+  value: 'CanID',
+  label: 'Candidate'}
+  },
+  presentationVariant: 
+  [{ sortOrder: [
+  { by: 'CanID', direction:  #ASC }], 
+ visualizations: [ 
+ {type: #AS_LINEITEM} ]
+  
+  }] }
+  
+annotate view ZC_CD
+    with 
+{
+             
+    @UI.facet: [ { id:             'Candidate',
+                 purpose:         #STANDARD,
+                 type:            #IDENTIFICATION_REFERENCE,
+                 label:           'Manage New Candidate',
+                 position:        10 },
+               { id:              'Employee',
+                 purpose:         #STANDARD,
+                 type:            #LINEITEM_REFERENCE,
+                 label:           'Manage New Employee',
+                 position:        20,
+                 targetElement:    '_emp'} ]
+                 
+
+    @UI.hidden: true               
+CanUuid;
+@UI: {  lineItem:       [ { position: 10 } ],
+          identification: [ { position: 10 } ],
+          selectionField: [ { position: 10 } ] }
+@EndUserText.label:'Candidate ID'
+  CanID;
+    @UI: {  lineItem:       [ { position: 14 } ],
+          identification: [ { position: 14 } ] }
+    @EndUserText.label:'First Name'
+  FirstName;
+@UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ] }
+@EndUserText.label:'Last Name' 
+  LastName;
+    @UI: {  lineItem:       [ { position: 25 } ],
+          identification: [ { position: 25 } ] }
+    @EndUserText.label:'Contact No'
+  ContactNo;
+      @UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 } ] }
+    @EndUserText.label:'Interview Date'
+  InterviewDate;
+  
+//  @Consumption.valueHelpDefinition: [{
+//
+//      entity: {
+//          name: 'zi_cd',
+//          element: 'CandidateStatus'
+//      }}]
+//  @Search.defaultSearchElement: true
+//      @UI: {  lineItem:       [ { position: 60 } ],
+//          identification: [ { position: 60 } ] }
+//    @EndUserText.label:'Candidate Status'
+//  CandidateStatus;
+    @UI: {  lineItem:       [ { position: 33,label :' Salary' } ],
+          identification: [ { position: 33 } ] }
+  @EndUserText.label:' Salary'
+   Salary;
+      @UI: {  lineItem:       [ { position: 35 } ],
+          identification: [ { position: 35 } ] }
+    @EndUserText.label:'Email'
+  Email;
+      @UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 } ] }
+    @EndUserText.label:'Address'
+  Address;
+  
+   @UI: {  lineItem:       [ { position:50 },
+                            { type: #FOR_ACTION, dataAction: 'Accept_Candidate', label: 'Set Candidate-onboarded' },
+                            { type: #FOR_ACTION, dataAction: 'Reject_Candidate', label: 'Reject Candidate' }
+                          ],
+          identification: [ { position: 50 },
+                            { type: #FOR_ACTION, dataAction: 'Accept_Candidate', label: 'Set Candidate-onboarded' },
+                            { type: #FOR_ACTION, dataAction: 'Reject_Candidate', label: 'Reject Candidate' }
+                          ] 
+                          }
+                          
+                          
+@EndUserText.label:'Candidate Status'
+CandidateStatus;
+    
+}

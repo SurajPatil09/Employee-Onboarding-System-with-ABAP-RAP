@@ -1,0 +1,48 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: 
+  { typeName: 'HR Decision',
+    typeNamePlural: 'Final Decision by HR',
+    title: { 
+    type: #STANDARD, 
+    label: 'HR Decision',
+    value: 'HrUuid' } },
+    presentationVariant: 
+  [{ sortOrder: [{ by: 'HrUuid', direction:  #ASC }],
+  visualizations: [ {type: #AS_LINEITEM} ]}]  }
+annotate view ZC_HR_431
+    with 
+{
+  @UI.facet: [ { id:            'idLevel3', 
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Final Decision by HR',
+                 position:      10 }  ]
+                 
+ @UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 , label: 'Last Designation'} ],
+          selectionField: [ { position: 20 } ] }
+@EndUserText.label:'Last Designation'
+   LastDesignation;
+@UI: {  lineItem:       [ { position: 30 } ],
+          identification: [ { position: 30 , label: 'Work Experience'} ],
+          selectionField: [ { position: 30 } ] }
+@EndUserText.label:'Work Experience'
+   Experience;
+@UI: {  lineItem:       [ { position: 40 } ],
+          identification: [ { position: 40 , label: 'Seperation Status'} ],
+          selectionField: [ { position: 40 } ] }
+@EndUserText.label:'Seperation Status' 
+    @Consumption.valueHelpDefinition: [{
+      entity: {
+          name: 'ZI_VH_YN',
+          element: 'Srno'
+      }}]
+   Seperation;
+@UI: {  lineItem:       [ { position: 50 } ],
+          identification: [ { position: 50 , label: 'Last Working Day'} ],
+          selectionField: [ { position: 50 } ] }
+@EndUserText.label:'Last Working Day'
+   SeperationDate;
+   
+}

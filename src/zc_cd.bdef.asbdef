@@ -1,0 +1,45 @@
+projection;
+strict ( 2 );
+//use draft;
+
+define behavior for ZC_CD alias candidate
+//use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Accept_Candidate;
+  use action Reject_Candidate;
+
+//  use action Edit;
+//  use action Activate;
+//  use action Discard;
+//  use action Resume;
+//  use action Prepare;
+
+  use association _emp { create;} //with draft; }
+}
+
+define behavior for ZC_EMPL_431 alias employee
+use etag
+{
+  use update;
+  use delete;
+
+//  use action acceptPromotion;
+//  use action rejectPromotion;
+
+  use association _can; //{ with draft; }
+  use association _hr { create;} //with draft; }
+}
+
+define behavior for ZC_HR_431 alias hr
+use etag
+{
+  use update;
+  use delete;
+
+  use association _can; //{ with draft; }
+  use association _emp; //{ with draft; }
+}

@@ -1,0 +1,81 @@
+@Metadata.layer: #CUSTOMER
+
+@UI: {
+  headerInfo: 
+  { typeName: 'Employee',
+   typeNamePlural: 'Employee Details',
+   title: 
+   { type: #STANDARD, 
+   label: 'Employee', 
+   value: 'EmpId' } },
+  presentationVariant: 
+  [{ sortOrder: [{ by: 'EmpUuid', direction:  #ASC }],
+  visualizations: [ {type: #AS_LINEITEM} ]}] }
+annotate view ZC_EMPL_431
+    with 
+{
+@UI.facet: [ {
+    id: 'Employee',
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Manage New Employee', 
+    position: 10 
+  }, 
+  {
+    id: 'idLevel3', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'HR Decision', 
+    position: 20 , 
+    targetElement: '_hr'
+  } ]
+
+
+
+@UI: {  lineItem:       [ { position: 20 } ],
+          identification: [ { position: 20 } ],
+          selectionField: [ { position: 20 } ] }
+@EndUserText.label:'Employee ID'
+    EmpId;
+//@UI: {  lineItem:       [ { position: 40 } ],
+//          identification: [ { position: 40 } ],
+//          selectionField: [ { position: 40 } ] }
+//@EndUserText.label:'Candiadate ID'
+//    CanId;
+@UI: {  lineItem:       [ { position: 50 } ],
+          identification: [ { position: 50 } ],
+          selectionField: [ { position: 50 } ] }
+@EndUserText.label:'Date of joining'
+    Dateofjoining;
+@UI: {  lineItem:       [ { position: 60 } ],
+          identification: [ { position: 60 } ],
+          selectionField: [ { position: 60 } ] }
+@EndUserText.label:'Project Name'
+    ProjectName;
+@UI: {  lineItem:       [ { position: 70 } ],
+          identification: [ { position: 70 } ],
+          selectionField: [ { position: 70 } ] }
+@EndUserText.label:'ProjAssign Start Date'
+    ProjAssignStartDate;
+@UI: {  lineItem:       [ { position: 80 } ],
+          identification: [ { position: 80 } ],
+          selectionField: [ { position: 80 } ] }
+@EndUserText.label:'ProjAssign End Date'
+    ProjAssignEndDate;
+@UI: {  lineItem:       [ { position: 85 } ],
+          identification: [ { position: 85 } ],
+          selectionField: [ { position: 85 } ] }
+@EndUserText.label:'Office Location'
+    Location;
+@UI: {  lineItem:       [ { position:95 } ],
+          identification: [ { position: 95 } ],
+          selectionField: [ { position: 95 } ] }   
+@EndUserText.label:'Promotion status'
+
+    @Consumption.valueHelpDefinition: [{
+      entity: {
+          name: 'ZI_VH_YN',
+          element: 'Srno'
+      }}]
+    Promotionstatus;
+    
+}
